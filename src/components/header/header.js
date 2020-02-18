@@ -8,7 +8,7 @@ import { login, logout, isAuthenticated } from "../../utils/auth"
 const Header = () => {
   const loggedIn = isAuthenticated()
   if (!loggedIn) {
-    // login()
+    login()
   }
 
   if (!loggedIn) {
