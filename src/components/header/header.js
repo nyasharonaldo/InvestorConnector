@@ -10,6 +10,7 @@ const Header = () => {
       {({ location }) => {
         if (location.pathname !== "/" && !loggedIn) {
           login()
+          
         }
         return <Component loggedIn={loggedIn} />
       }}
