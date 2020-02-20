@@ -57,6 +57,7 @@ const Blog = () => {
     )
   }else{
     login()
+    return(<div></div>)
   }
   
 }
