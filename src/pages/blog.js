@@ -1,19 +1,10 @@
 import React from "react"
 import { Router } from "@reach/router"
+import {login, isAuthenticated } from "../utils/auth"
 import Layout from "../components/layout"
 import { Link, graphql, useStaticQuery } from "gatsby"
 
 const Home = () => {
-  return (
-    <Layout>
-      <p />
-    </Layout>
-  )
-}
-// const Settings = () => <p>Settings</p>
-// const Billing = () => <p>Billing</p>
-
-const Blog = () => {
   const dataContentful = useStaticQuery(graphql`
     query {
       allContentfulBlogPost(sort: { fields: publishedDate, order: DESC }) {
@@ -29,7 +20,7 @@ const Blog = () => {
   `)
 
   return (
-    <>
+    <Layout>
       <section class="container">
         <ol>
           {dataContentful.allContentfulBlogPost.edges.map(edge => {
@@ -44,13 +35,30 @@ const Blog = () => {
           })}
         </ol>
       </section>
-      <Router>
-        <Home path="/blog" />
-        {/* <Settings path="/blog/settings" />
-        <Billing path="/blog/billing" /> */}
-      </Router>
-    </>
+    </Layout>
   )
+}
+// const Settings = () => <p>Settings</p>
+// const Billing = () => <p>Billing</p>
+
+const Blog = () => {
+  const loggedIn = isAuthenticated()
+  
+  if(loggedIn){
+    return (
+      <>
+        
+        <Router>
+          <Home path="/blog" />
+          {/* <Settings path="/blog/settings" />
+          <Billing path="/blog/billing" /> */}
+        </Router>
+      </>
+    )
+  }else{
+    login()
+  }
+  
 }
 
 export default Blog

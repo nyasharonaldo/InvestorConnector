@@ -1,16 +1,23 @@
-import { Link} from "gatsby"
 import React from "react"
-import { Router } from "@reach/router"
 import HeaderDash from "./header-dash"
 import { login, logout, isAuthenticated } from "../../utils/auth"
-
+import { Link, Location } from "@reach/router"
 
 const Header = () => {
   const loggedIn = isAuthenticated()
-  if (!loggedIn) {
-    login()
-  }
+  return (
+    <Location>
+      {({ location }) => {
+        if (location.pathname !== "/" && !loggedIn) {
+          login()
+        }
+        return <Component loggedIn={loggedIn} />
+      }}
+    </Location>
+  )
+}
 
+const Component = ({ loggedIn }) => {
   if (!loggedIn) {
     return (
       <nav class="navbar bg-dark">
