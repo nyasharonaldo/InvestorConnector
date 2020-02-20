@@ -2,7 +2,6 @@ import React from "react"
 import HeaderDash from "./header-dash"
 import { login, logout, isAuthenticated } from "../../utils/auth"
 import { Link, Location, navigate } from "@reach/router"
-import {navigate} from 'gatsby'
 const Header = () => {
   const loggedIn = isAuthenticated()
   return (
