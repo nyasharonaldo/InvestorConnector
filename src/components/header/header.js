@@ -1,8 +1,8 @@
 import React from "react"
 import HeaderDash from "./header-dash"
 import { login, logout, isAuthenticated } from "../../utils/auth"
-import { Link, Location } from "@reach/router"
-
+import { Link, Location, navigate } from "@reach/router"
+import {navigate} from 'gatsby'
 const Header = () => {
   const loggedIn = isAuthenticated()
   return (
@@ -10,7 +10,7 @@ const Header = () => {
       {({ location }) => {
         if (location.pathname !== "/" && !loggedIn) {
           login()
-          
+
         }
         return <Component loggedIn={loggedIn} />
       }}
@@ -39,6 +39,7 @@ const Component = ({ loggedIn }) => {
               onClick={e => {
                 logout()
                 e.preventDefault()
+                navigate('/')
               }}
             >
               <i className="fa fa-sign-out" />
