@@ -38,7 +38,7 @@ const Component = ({ loggedIn }) => {
               onClick={e => {
                 logout()
                 e.preventDefault()
-                navigate('/')
+                
               }}
             >
               <i className="fa fa-sign-out" />
