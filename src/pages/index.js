@@ -1,6 +1,6 @@
 import React from "react"
 import { Link } from "gatsby"
-import {navigate} from '@reach/router'
+import { navigate } from "gatsby"
 import Layout from "../components/layout"
 import SEO from "../components/seo"
 import { isAuthenticated } from "../utils/auth"
@@ -9,8 +9,7 @@ const Home = ({ location }) => {
   const loggedIn = isAuthenticated()
   if (loggedIn) {
     navigate("/blog")
-    return(<div></div>)
-  } else {
+  } 
     return (
       <div>
         <Layout>
@@ -31,6 +30,6 @@ const Home = ({ location }) => {
         </Layout>
       </div>
     )
-  }
+  
 }
 export default Home
