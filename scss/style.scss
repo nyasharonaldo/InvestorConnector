@@ -1,7 +1,7 @@
 @import "config";
 @import "utilities";
 @import "form";
-@import url('https://fonts.googleapis.com/css?family=Raleway&display=swap');
+@import url("https://fonts.googleapis.com/css?family=Raleway&display=swap");
 
 * {
   box-sizing: border-box;
@@ -53,7 +53,7 @@ img {
     &:hover {
       color: $primary-color;
     }
-    &.navlinks{
+    &.navlinks {
       font-size: 4rem;
     }
   }
@@ -79,49 +79,88 @@ img {
   }
 }
 
+/* Header Showcase */
+
+#showcase {
+  min-height: 450px;
+  color: #fff;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+#showcase .bg-image {
+  position: absolute;
+  background: #333
+    url("../img/motorcycle.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  justify-content: center;
+  align-items: center;
+  width: $max-width;
+  // max-width: 100%;
+  height: 450px;
+  z-index: -1;
+  opacity: 0.4;
+}
+
+#showcase h1 {
+  padding-top: 5rem;
+  padding-bottom: 0;
+}
+
+#showcase .content-wrap {
+  padding: 0 1.5em;
+}
+
+
 //Blog Grid
 
-.blog-section{
+.blog-section {
   margin: auto;
   width: 100%;
   max-width: 850px;
   height: auto;
   max-height: 450px;
-  background:#313131;
+  background: #313131;
 }
 
-#blog-grid{
+#blog-grid {
   display: grid;
-  grid-template-columns: repeat(3,1fr);
-  grid-template-rows: repeat(3,minmax(10rem,auto));
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: minmax(10rem, auto);
   grid-gap: 12px;
-  
 
-  .box{
+  .box {
     display: flex;
     justify-content: center;
     align-items: center;
 
-    &:nth-child(1){
-      background: #00ca85;
-      grid-column: 1/3;
-      grid-row: 1/3;
+    &:hover{
+      @include transition-ease;
     }
-    &:nth-child(2){
-      background: #ffce00;
-      // grid-column: 2/3;
-      // grid-row: 1/3;
-      // z-index: 10;
+    img {
+      background: #333;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      max-height: 25rem;
+      object-fit: cover;
+      
+      z-index: -10;
+      opacity: 1;
     }
-    &:nth-child(3){
-      justify-content: flex-start;
-      background: #0085ca;
-      // grid-column: 1/3;
-      // grid-row: 2/4;
-    }
-    &:nth-child(4){
+    // &:nth-child(1) {
+    //   // background: #00ca85;
+    //   grid-column: 1/3;
+    //   grid-row: 1/3;
+    //   align-items: flex-start;
+      
+
+      
+    // }
+    &#news {
       align-items: flex-start;
-      background: #f3f3f3;
       grid-column: 3/3;
       grid-row: 1/4;
     }
@@ -144,40 +183,40 @@ img {
   display: grid;
   grid-template-areas: "top top" "about about" "exp edu" "github github";
   grid-gap: 1rem;
-  .profile-top{
+  .profile-top {
     grid-area: top;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
     text-align: center;
-    img{
+    img {
       width: 250px;
     }
-    .icons a{
+    .icons a {
       color: #fff;
       margin: 0 0.3rem;
 
-      &:hover{
+      &:hover {
         color: $dark-color;
       }
     }
   }
-  .profile-about{
+  .profile-about {
     grid-area: about;
     text-align: center;
-    
-    .skills{
+
+    .skills {
       display: flex;
       align-items: center;
       justify-content: center;
       text-align: center;
     }
   }
-  .profile-exp{
+  .profile-exp {
     grid-area: exp;
   }
-  .profile-edu{
+  .profile-edu {
     grid-area: edu;
   }
 
@@ -188,8 +227,8 @@ img {
       padding-bottom: 1rem;
       border-bottom: #ccc 1px dotted;
     }
-    
-    &:last-child{
+
+    &:last-child {
       border: none;
     }
 
@@ -198,43 +237,42 @@ img {
     }
   }
 
-  .profile-github{
+  .profile-github {
     grid-area: github;
-    .repo{
+    .repo {
       display: flex;
 
-      & > div:first-child{
+      & > div:first-child {
         flex: 7;
         flex-basis: 70%;
       }
-      & > div:last-child{
+      & > div:last-child {
         flex: 3;
         flex-basis: 20%;
       }
-
     }
   }
 }
 
 // Posts page
-.post-form-header{
+.post-form-header {
   padding: 0.5rem;
 }
 
-.post{
+.post {
   display: grid;
   grid-template-columns: 1fr 4fr;
   grid-gap: 2rem;
   align-items: center;
   padding: 1rem;
 
-  & > div:first-child{
+  & > div:first-child {
     text-align: center;
   }
 
-  img{
+  img {
     width: 150px;
   }
 }
 
-@import 'mobile';
+@import "mobile";

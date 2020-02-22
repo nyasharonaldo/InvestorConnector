@@ -2,10 +2,10 @@ import React from "react"
 import { Router } from "@reach/router"
 import { login, isAuthenticated } from "../utils/auth"
 import Layout from "../components/layout"
-import { Link, graphql, useStaticQuery } from "gatsby"
+import { graphql, useStaticQuery } from "gatsby"
+import MiniPost from "../components/miniPost"
 
 const Home = () => {
-  const inc = 0;
   const dataContentful = useStaticQuery(graphql`
     query {
       allContentfulBlogPost(sort: { fields: publishedDate, order: DESC }) {
@@ -13,56 +13,55 @@ const Home = () => {
           node {
             title
             slug
+            id
             publishedDate(formatString: "MMMM Do YYYY")
+            backgroundImage {
+              file {
+                url
+              }
+            }
           }
         }
       }
     }
   `)
-  
-
+  const edges = dataContentful.allContentfulBlogPost.edges
+  const mainBoxImgUrls = edges.map(
+    edge => edge["node"]["backgroundImage"]["file"]["url"]
+  )
   return (
     <Layout>
       <section class="container">
-      {/* <ol>
-          {dataContentful.allContentfulBlogPost.edges.map(edge => {
-            return (
-              <li className="post">
-                <Link to={"/blog/" + edge.node.slug}>
-                  <h2>{edge.node.title}</h2>
-                  <p>{edge.node.publishedDate}</p>
-                </Link>
-              </li>
-            )
-          })}
-        </ol> */}
+        <header id="showcase" class="grid">
+          <div class="bg-image" />
+          <div class="content-wrap">
+            <h1>Welcome to Investor Connector</h1>
+            <p>
+              The central place for investors to connect on new and ground
+              breaking market research. Here you will be introduced to and
+              collaborate with some of the most talented investing professionals
+              which will grow your skills and let's not lie... make you a lot of
+              money
+            </p>
+            <a href="#blog-grid" class="btn">
+              Read More
+            </a>
+          </div>
+        </header>
         <section id="blog-grid">
-          <div class="box">
-            <div class="box-content">
-            <ol>
-            {dataContentful.allContentfulBlogPost.edges.map(edge => {
-              // TODO: If statement for getting up to 3 nodes. Implement in CSS with first child etc... look at css grid tutorial
-            return (
-              <li className="post">
-                <Link to={"/blog/" + edge.node.slug}>
-                  <h2>{edge.node.title}</h2>
-                  <p>{edge.node.publishedDate}</p>
-                </Link>
-              </li>
-            )
-          })}
-        </ol>
-              </div>
-          </div>
-          <div class="box">
-            <div class="box-content">Hello, Box2</div>
-          </div>
-          <div class="box">
-            <div class="box-content">Hello, Box3</div>
-          </div>
-          <div class="box">
-            <div class="box-content">Hello, Box4</div>
-          </div>
+          {edges.map(edge => (
+            <div className="box">
+              <MiniPost
+                img={edge["node"]["backgroundImage"]["file"]["url"]}
+                slug={edge["node"]["slug"]}
+                title={edge["node"]["title"]}
+                publishedDate={edge["node"]["publishedDate"]}
+              />
+            </div>
+          ))}
+          {/* <div id="news" className="box">
+            <MiniPost title="News Article" />
+          </div> */}
         </section>
       </section>
     </Layout>
